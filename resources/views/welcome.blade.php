@@ -1,10 +1,20 @@
-@extends("layout")
+@extends('layout')
 
-@section("naslovStranice")
-    Glavna stranica
+@section('naslovStranice')
+  Glavna stranica
 @endsection
 
-@section("sadrzajStranice")
-    <p>Trenutno vrijeme je {{ date("H:i:s") }}</p>
+@section('sadrzajStranice')
+  @if ($sat >= 0 && $sat <= 12)
+    <p>Dobro jutro!</p>
+  @else
+    <p>Dobar dan</p>
+  @endif
+
+  <p>Trenutno sati: {{ $sat }}</p>
+  <p>Trenutno vrijeme je {{ $trenutnoVrijeme }}</p>
 @endsection
+
+
+
 

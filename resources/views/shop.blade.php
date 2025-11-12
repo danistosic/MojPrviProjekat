@@ -1,10 +1,17 @@
 
-@extends("layout")
+@extends('layout')
 
-@section("naslovStranice")
-    Shop
+@section('naslovStranice')
+  Trgovina
 @endsection
 
-@section("sadrzajStranice")
-    <p>Ovo je shop stranica</p>
+@section('sadrzajStranice')
+  @foreach($products as $product)
+        <div>
+            <p>{{ $product->name }}</p>
+            <p>{{ $product->description }}</p>
+        </div>
+    @endforeach
 @endsection
+
+

@@ -1,11 +1,25 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ContactController;
 
-Route::view('/', 'welcome');
+// statične stranice
 Route::view('/about', 'about');
-Route::view('/shop', 'shop');
-Route::view('/contact', 'contact');
+
+// početna preko controllera
+Route::get('/', [HomepageController::class, 'index']);
+
+// shop preko controllera
+Route::get('/shop', [ShopController::class, 'index']);
+
+// kontakt preko controllera
+Route::get('/contact', [ContactController::class, 'index']);
+
+Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::class, 'allContacts']);
+
+
+
 
 
