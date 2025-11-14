@@ -19,6 +19,16 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::class, 'allContacts']);
 
+Route::post('/send-contact', [\App\Http\Controllers\ContactController::class, 'sendContact']);
+
+// ADD PRODUCT FORM
+Route::get('/admin/add-product', [\App\Http\Controllers\ShopController::class, 'showAddProductForm']);
+
+// STORE PRODUCT
+Route::post('/admin/add-product', [\App\Http\Controllers\ShopController::class, 'storeProduct']);
+
+// SHOW ALL PRODUCTS
+Route::get('/admin/products', [\App\Http\Controllers\ShopController::class, 'showAllProducts']);
 
 
 
