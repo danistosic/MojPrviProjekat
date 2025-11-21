@@ -11,10 +11,6 @@
     <p>Dobar dan</p>
   @endif
 
-  @foreach($products as $product)
-        <p>{{ $product->name }}</p>
-    @endforeach
-
    <form method="POST" action="/send-contact" class="mb-4 mx-auto" style="max-width: 400px;">
 
     @if($errors->any())

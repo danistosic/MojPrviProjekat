@@ -51,12 +51,13 @@ class ShopController extends Controller
 
     public function showAllProducts()
     {
-    // 1) Uzmi sve proizvode iz baze
-    $products = ProductsModel::all();
+    // Fetch all products from the database
+    $allProducts = ProductsModel::all();
 
-    // 2) Vrati na view i pošalji proizvode
-    return view('allProducts', compact('products'));
+    // Return the view and send $allProducts to Blade
+    return view('allProducts', compact('allProducts'));
     }
+
 
   
 }
