@@ -7,9 +7,7 @@ use Illuminate\Http\Request;    // request objekt za formu
 
 class ShopController extends Controller
 {
-    // -------------------------------------------------------
-    // 1) PRIKAZ SHOP STRANICE
-    // -------------------------------------------------------
+    // Prikaz shop stranice
     public function index()
     {
         // Uzima sve proizvode iz baze
@@ -19,31 +17,23 @@ class ShopController extends Controller
         return view('shop', compact('products'));
     }
 
-
-    // -------------------------------------------------------
-    // 2) PRIKAZ FORME ZA DODAVANJE PROIZVODA (GET)
-    // URL: /admin/add-product
-    // -------------------------------------------------------
+    // 2) PRIKAZ FORME ZA DODAVANJE PROIZVODA (GET) URL: /admin/add-product
     public function showAddProductForm()
     {
         // Učitava Blade view addProduct.blade.php
         return view('addProduct');
     }
 
-
-    // -------------------------------------------------------
-    // 3) SPREMANJE PROIZVODA U BAZU (POST)
-    // URL: /admin/add-product
-    // -------------------------------------------------------
+    // 3) SPREMANJE PROIZVODA U BAZU (POST) URL: /admin/add-product
     public function storeProduct(Request $request)
     {
         // VALIDACIJA
         $request->validate([
-            'name'        => 'required|string',
-            'description' => 'required|string|min:5',
-            'amount'      => 'required|integer',
-            'price'       => 'required|numeric',
-            'image'       => 'required|string'
+            'name'        => 'required|string|min:3|max:255',
+            'description' => 'required|string|min:5|max:500',
+            'amount'      => 'required|integer|min:1|max:9999',
+            'price'       => 'required|numeric|min:0.1|max:99999',
+            'image'       => 'required|string|max:255',
         ]);
 
         // SPREMANJE U BAZU
@@ -68,11 +58,6 @@ class ShopController extends Controller
     return view('allProducts', compact('products'));
     }
 
-
-    // -------------------------------------------------------
-    // 4) PRIKAZ SVIH PROIZVODA U HTML TABLICI
-    // URL: /admin/products
-    // -------------------------------------------------------
   
 }
 

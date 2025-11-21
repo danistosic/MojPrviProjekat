@@ -30,6 +30,20 @@ Route::post('/admin/add-product', [\App\Http\Controllers\ShopController::class, 
 // SHOW ALL PRODUCTS
 Route::get('/admin/products', [\App\Http\Controllers\ShopController::class, 'showAllProducts']);
 
+// /admin/all-products -> Prikaz svih proizvoda u HTML tablici
+Route::get('/admin/all-products', [\App\Http\Controllers\ProductsController::class, 'index']);
+
+// /admin/delete-product/{product} -> Brisanje jednog proizvoda po ID-u
+Route::get('/admin/delete-product/{product}', [\App\Http\Controllers\ProductsController::class, 'delete']);
+
+// /admin/delete-contact/2 → Brisanje kontakta po ID-u
+Route::get('/admin/delete-contact/{contact}', [\App\Http\Controllers\ContactController::class, 'delete']);
+
+// Prikazuje HTML formu za dodavanje novog proizvoda
+Route::view('/admin/add-product', 'addProduct');
+
+
+
 
 
 

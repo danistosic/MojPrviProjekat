@@ -1,30 +1,44 @@
+@extends('layout')
+
+@section('sadrzajStranice')
+
 <div class="container mt-4">
 
     <h3 class="mb-4">All Products</h3>
 
-    <table class="table table-striped">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Amount</th>
                 <th>Price</th>
                 <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach($products as $product)
+            @foreach($allProducts as $product)
                 <tr>
+                    <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->amount }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->image }}</td>
+                    <td>
+                        <a href="/admin/delete-product/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
 </div>
+
+@endsection
+
 
