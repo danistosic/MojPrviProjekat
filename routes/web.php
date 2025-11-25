@@ -22,7 +22,8 @@ Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::clas
 Route::post('/send-contact', [\App\Http\Controllers\ContactController::class, 'sendContact']);
 
 // ADD PRODUCT FORM
-Route::get('/admin/add-product', [\App\Http\Controllers\ShopController::class, 'showAddProductForm']);
+Route::get('/admin/add-product', [\App\Http\Controllers\ShopController::class, 'showAddProductForm'])
+    ->name('admin.add-product');   // omogućuje pozivanje rute preko njenog imena (npr. u Blade-u route('admin.add-product')) ime u zagradi moze biti bilo koje
 
 // STORE PRODUCT
 Route::post('/admin/add-product', [\App\Http\Controllers\ShopController::class, 'storeProduct']);
@@ -41,6 +42,16 @@ Route::get('/admin/delete-contact/{contact}', [\App\Http\Controllers\ContactCont
 
 // Prikazuje HTML formu za dodavanje novog proizvoda
 Route::view('/admin/add-product', 'addProduct');
+
+// Prikazuje formu za uređivanje proizvoda po ID-u
+Route::get('/admin/product/edit/{id}', [\App\Http\Controllers\ProductsController::class, 'singleProduct'])
+    ->name('product.edit');
+
+// Spremanje izmijenjenog proizvoda
+Route::post('/admin/product/save/{id}', [\App\Http\Controllers\ProductsController::class, 'edit'])
+    ->name('product.save');
+
+
 
 
 

@@ -29,7 +29,7 @@ class ShopController extends Controller
     {
         // VALIDACIJA
         $request->validate([
-            'name'        => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255|unique:products', // "name" mora biti jedinstven u tablici products
             'description' => 'required|string|min:5|max:500',
             'amount'      => 'required|integer|min:1|max:9999',
             'price'       => 'required|numeric|min:0.1|max:99999',

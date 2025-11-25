@@ -1,44 +1,66 @@
 @extends('layout')
 
 @section('sadrzajStranice')
+    <div class="container mt-4">
 
-<div class="container mt-4">
+        <h3 class="mb-4">All Products</h3>
 
-    <h3 class="mb-4">All Products</h3>
+        {{-- Flash poruka nakon uspješnog editiranja proizvoda --}}
+        @if (session('success'))
+            <div id="success-alert" class="alert alert-success"
+                style="background: rgba(40, 167, 69, 0.2); 
+            border: 1px solid rgba(40, 167, 69, 0.4); 
+            color: #155724;
+            backdrop-filter: blur(4px);
+            border-radius: 8px;">
+                {{ session('success') }}
+            </div>
 
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+            <script>
+                // Automatski sakrij poruku nakon 3 sekunde
+                setTimeout(function() {
+                    const alert = document.getElementById('success-alert');
+                    if (alert) {
+                        alert.style.transition = "opacity 0.8s";
+                        alert.style.opacity = "0";
+                        setTimeout(() => alert.remove(), 800);
+                    }
+                }, 3000);
+            </script>
+        @endif
 
-        <tbody>
-            @foreach($allProducts as $product)
+        <table class="table table-hover table-striped">
+            <thead>
                 <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->amount }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->image }}</td>
-                    <td>
-                        <a href="/admin/delete-product/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a>
-                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
 
-</div>
+            <tbody>
+                @foreach ($allProducts as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->amount }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->image }}</td>
 
+                        <td>
+                            <a href="/admin/delete-product/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ route('product.edit', ['id' => $product->id]) }}"
+                                class="btn btn-primary btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
 @endsection
-
-
