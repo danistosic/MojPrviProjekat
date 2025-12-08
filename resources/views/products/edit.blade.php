@@ -5,8 +5,9 @@
 
         <h3 class="mb-4 text-center">Uredi proizvod</h3>
 
-        <form method="POST" action="{{ route('product.save', ['id' => $product->id]) }}">
+        <form method="POST" action="{{ route('product.update', ['product' => $product->id]) }}">
             @csrf
+            @method('PATCH')
 
             <div class="mb-3">
                 <label class="form-label">Name</label>

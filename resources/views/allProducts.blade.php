@@ -53,10 +53,19 @@
                         <td>{{ $product->image }}</td>
 
                         <td>
-                            <a href="/admin/delete-product/{{ $product->id }}" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="{{ route('product.edit', ['id' => $product->id]) }}"
+                            <form action="{{ route('product.delete', ['product' => $product->id]) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+
+                            <a href="{{ route('product.edit', ['product' => $product->id]) }}"
                                 class="btn btn-primary btn-sm">Edit</a>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

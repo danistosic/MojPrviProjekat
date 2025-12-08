@@ -46,7 +46,8 @@ class ShopController extends Controller
         ]);
 
         // Nakon spremanja — preusmjeri na listu svih proizvoda
-        return redirect('/admin/products');
+         return redirect()->route('products.all')
+                     ->with('success', 'Product created successfully!');
     }
 
     public function showAllProducts()

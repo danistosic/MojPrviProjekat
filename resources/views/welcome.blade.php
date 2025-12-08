@@ -5,11 +5,7 @@
 @endsection
 
 @section('sadrzajStranice')
-  @if ($sat >= 0 && $sat <= 12)
-    <p>Dobro jutro!</p>
-  @else
-    <p>Dobar dan</p>
-  @endif
+  
 
    <form method="POST" action="/send-contact" class="mb-4 mx-auto" style="max-width: 400px;">
 
@@ -46,11 +42,6 @@
     <button class="btn btn-primary w-100">Send Message</button>
 </form>
 
-
-
-
-  <p>Trenutno sati: {{ $sat }}</p>
-  <p>Trenutno vrijeme je {{ $trenutnoVrijeme }}</p>
 @endsection
 
 
