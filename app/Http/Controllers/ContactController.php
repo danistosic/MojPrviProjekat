@@ -6,7 +6,6 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 
-
 class ContactController extends Controller
 {
     // 1) Otvaranje contact stranice (form)
@@ -26,15 +25,11 @@ class ContactController extends Controller
     // 3) Slanje kontakt poruke + validacija + spremanje u bazu
     public function sendContact(ContactRequest $request)
     {
-        Contact::create([
-            'email'   => $request->email,
-            'subject' => $request->subject,
-            'message' => $request->description,
-        ]);
+        // Spremanje validiranih podataka
+        Contact::create($request->validated());
 
-        return redirect()
-            ->route('shop')
-            ->with('success', 'Poruka je uspješno poslana!');
+        // Povratak na stranicu s porukom o uspjehu
+        return back()->with('success', 'Poruka je uspješno poslana!');
     }
 }
 

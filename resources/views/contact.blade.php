@@ -59,14 +59,19 @@
 
             <div class="mb-3">
                 <label for="exampleInputMessage" class="form-label">Message</label>
-                <textarea class="form-control" id="exampleInputMessage" name="description" rows="3" required>{{ old('description') }}</textarea>
+
+                <textarea class="form-control" id="exampleInputMessage" name="message" rows="3">{{ old('message') }}</textarea>
+
+                @error('message')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
 
-        {{-- MAPA — ORIGINAL TVOJA, NIŠTA MIJENJANO --}}
+        {{-- MAPA --}}
         <div class="d-flex justify-content-center mt-4">
             <div class="ratio ratio-16x9" style="max-width: 40%;">
 

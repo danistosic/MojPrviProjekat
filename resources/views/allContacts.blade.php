@@ -1,6 +1,6 @@
-@extends("layout")
+@extends('layout')
 
-@section("sadrzajStranice")
+@section('sadrzajStranice')
 
 <div class="container mt-4">
 
@@ -18,20 +18,22 @@
         </thead>
 
         <tbody>
-            @foreach($allContacts as $contact)
-                <tr>
-                    <td>{{ $contact->id }}</td>
-                    <td>{{ $contact->email }}</td>
-                    <td>{{ $contact->subject }}</td>
-                    <td>{{ $contact->message }}</td>
-                    <td>
-                        <a href="/admin/delete-contact/{{ $contact->id }}" class="btn btn-danger btn-sm">Delete</a>
-                        <a href="{{ route('product.edit', ['id' => $product->id]) }}" class="btn btn-primary">Edit</a>
-
-                    </td>
-                </tr>
-            @endforeach
+        @foreach ($allContacts as $contact)
+            <tr>
+                <td>{{ $contact->id }}</td>
+                <td>{{ $contact->email }}</td>
+                <td>{{ $contact->subject }}</td>
+                <td>{{ $contact->message }}</td>
+                <td>
+                    <a href="{{ route('contact.delete', $contact->id) }}"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
+
     </table>
 
 </div>

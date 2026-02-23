@@ -27,6 +27,11 @@ class ProductsController extends Controller
         return view("allProducts", compact('allProducts'));
     }
 
+    public function showAddProductForm()
+    {
+        return view('products.addProduct');
+    }
+
     // Brisanje proizvoda
     public function delete($product)
     {
@@ -53,7 +58,7 @@ class ProductsController extends Controller
         // Repository update
         $this->productRepo->editProduct($product, $request);
 
-        return redirect()->back();
+        return redirect('/admin/products/all');
     }
 
     // Dodavanje novog proizvoda (POST)
@@ -63,7 +68,7 @@ class ProductsController extends Controller
         $this->productRepo->createNew($request);
 
         return redirect()
-            ->route('sviProizvodi')
+            ->route('products.all')
             ->with('success', 'Product created successfully!');
     }
 }

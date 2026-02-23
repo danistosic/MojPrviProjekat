@@ -4,70 +4,45 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| Public pages
-|--------------------------------------------------------------------------
-*/
-
-// Početna stranica
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// About stranica
-Route::get('/about', function () {
-    return view('about');
-});
-
-// Contact stranica (GET)
+// Public
+Route::get('/', fn() => view('welcome'));
+Route::get('/about', fn() => view('about'));
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
-// Slanje contact forme (POST)
 Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('send.contact');
 
-
-/*
-|--------------------------------------------------------------------------
-| Shop
-|--------------------------------------------------------------------------
-*/
-
-// Prikaz shop stranice
+// Shop
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
+// Admin
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->group(function () {
 
-/*
-|--------------------------------------------------------------------------
-| Admin Products
-|--------------------------------------------------------------------------
-*/
+        // Products
+        Route::controller(ProductsController::class)
+            ->prefix('products')
+            ->name('products.')
+            ->group(function () {
 
-// Prikaz svih proizvoda
-Route::get('/admin/all-products', [ProductsController::class, 'index'])->name('products.all');
+                Route::get('/all', 'index')->name('all');
+                Route::get('/add', 'showAddProductForm')->name('add');
+                Route::post('/save', 'saveProduct')->name('create');
+                Route::get('/edit/{product}', 'singleProduct')->name('single');
+                Route::post('/save/{product}', 'edit')->name('save');
+                Route::get('/delete/{product}', 'delete')->name('delete');
+            });
 
-// Forma za dodavanje proizvoda (GET)
-Route::get('/admin/add-product', [ShopController::class, 'showAddProductForm'])->name('product.add');
+        // Contacts
+        Route::controller(ContactController::class)
+            ->prefix('contact')
+            ->name('contact.')
+            ->group(function () {
 
-// Spremanje proizvoda (POST)
-Route::post('/admin/add-product', [ShopController::class, 'storeProduct'])->name('product.store');
+                Route::get('/all', 'allContacts')->name('all');
+                Route::post('/send', 'sendContact')->name('send');
+                Route::get('/delete/{contact}', 'delete')->name('delete');
+            });
+    });
 
-// Brisanje proizvoda
-Route::delete('/admin/delete-product/{product}', [ProductsController::class, 'delete'])->name('product.delete');
-
-// Edit proizvoda — forma
-Route::get('/admin/edit-product/{product}', [ProductsController::class, 'singleProduct'])->name('product.edit');
-
-// Edit proizvoda — spremanje
-Route::patch('/admin/edit-product/{product}', [ProductsController::class, 'edit'])->name('product.update');
-
-
-/*
-|--------------------------------------------------------------------------
-| Auth (Laravel Breeze)
-|--------------------------------------------------------------------------
-*/
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
