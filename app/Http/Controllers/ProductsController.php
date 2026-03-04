@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
+
     // Repository instance
     private $productRepo;
 
@@ -35,6 +36,7 @@ class ProductsController extends Controller
     // Brisanje proizvoda
     public function delete($product)
     {
+
         $singleProduct = $this->productRepo->getProductById($product);
 
         if ($singleProduct === null) {
@@ -49,12 +51,14 @@ class ProductsController extends Controller
     // Prikaz forme za edit (Route Model Binding)
     public function singleProduct(Request $request, ProductsModel $product)
     {
+
         return view('products.edit', compact('product'));
     }
 
     // Spremanje izmijenjenog proizvoda (POST)
     public function edit(UpdateProductRequest $request, ProductsModel $product)
     {
+
         // Repository update
         $this->productRepo->editProduct($product, $request);
 
@@ -64,11 +68,18 @@ class ProductsController extends Controller
     // Dodavanje novog proizvoda (POST)
     public function saveProduct(SaveProductRequest $request)
     {
+
         // Repository create
         $this->productRepo->createNew($request);
 
         return redirect()
             ->route('products.all')
             ->with('success', 'Product created successfully!');
+    }
+
+    // SINGLE PRODUCT PAGE (mentor)
+    public function permalink(ProductsModel $product)
+    {
+        return view('products.permalink', compact('product'));
     }
 }

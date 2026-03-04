@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ShoppingCartController; 
 
 // Public
 Route::get('/', fn() => view('welcome'));
@@ -13,6 +14,13 @@ Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('s
 
 // Shop
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+// SINGLE PRODUCT
+Route::get('/products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
+
+// CART ADD (NOVO)
+Route::post('/cart/add', [ShoppingCartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');
 
 // Admin
 Route::middleware(['auth'])
