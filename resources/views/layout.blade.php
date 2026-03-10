@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@yield("naslovStranice")</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+    <title>@yield('naslovStranice')</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8NlNtUVF0sA7MsXp1UyJoM9YL+ENsfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8NlNtUVF0sA7MsXsP1UyJoMp4YLEnSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
-    @include("navigation")
 
-    @yield("sadrzajStranice")
+@include('navigation')
 
-    @include("footer")
+@if(session('success'))
+<div class="container mt-3">
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+</div>
+@endif
+
+@yield('sadrzajStranice')
+
+@include('footer')
+
 </body>
 </html>
 

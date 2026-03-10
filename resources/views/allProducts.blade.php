@@ -5,6 +5,12 @@
 
         <h3 class="mb-4">All Products</h3>
 
+        <a href="{{ route('products.add') }}" target="_blank">
+            <button style="margin-bottom:15px;padding:8px 15px;">
+                Add Product
+            </button>
+        </a>
+
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
@@ -38,7 +44,7 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach 
+                @endforeach
             </tbody>
 
         </table>

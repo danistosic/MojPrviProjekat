@@ -1,22 +1,38 @@
-@extends("layout")
+@extends('layout')
 
-@section("naslovStranice")
-Permalink
-@endsection
+@section('sadrzajStranice')
 
-@section("sadrzajStranice")
+<div class="container mt-4" style="max-width:500px;">
 
-<p>{{ $product->name }}</p>
+<h2 class="mb-3">{{ $product->name }}</h2>
+
+<p class="text-muted fs-5">Price: {{ $product->price }}</p>
 
 <form method="POST" action="{{ route('cart.add') }}">
-{{ csrf_field() }}
+@csrf
 
 <input type="hidden" name="id" value="{{ $product->id }}">
 
-<input type="text" name="amount" placeholder="Enter amount">
+<label class="form-label">Quantity</label>
 
-<button>Add to cart</button>
+<div class="input-group mb-3" style="max-width:200px;">
+
+<input 
+type="number"
+name="amount"
+value="1"
+min="1"
+class="form-control text-center"
+>
+
+<button class="btn btn-success">
+Add to cart
+</button>
+
+</div>
 
 </form>
+
+</div>
 
 @endsection
